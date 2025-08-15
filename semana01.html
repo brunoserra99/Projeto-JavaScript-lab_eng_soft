@@ -3,9 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Exercícios com JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Semana 1</h1>
+
+    <h1>Exercícios JavaScript</h1>
+
+    <button onclick="verificarParOuImpar()">1. Verificar se é Par ou Ímpar</button>
+    <button onclick="verificarPrimo()">2. Verificar se é Primo</button>
+    <button onclick="calcularFatorial()">3. Calcular Fatorial</button>
+    <button onclick="verificarTipoDado()">4. Verificar Tipo de Dado</button>
+
+    <script>
+        function verificarParOuImpar() {
+            let numero = prompt("Digite um número inteiro positivo:");
+
+            if (numero !== null) {
+                numero = parseInt(numero);
+
+                if (!isNaN(numero) && numero >= 0) {
+                    if (numero % 2 === 0) {
+                        alert("O número é par.");
+                    } else {
+                        alert("O número é ímpar.");
+                    }
+                } else {
+                    alert("Valor inválido. Digite um número inteiro positivo.");
+                }
+            }
+        }
+
+        function verificarPrimo() {
+            let numero = prompt("Digite um número inteiro positivo:");
+
+            if (numero !== null) {
+                numero = parseInt(numero);
+
+                if (!isNaN(numero) && numero >= 1) {
+                    let ehPrimo = true;
+
+                    if (numero === 1) {
+                        ehPrimo = false;
+                    } else {
+                        for (let i = 2; i <= Math.sqrt(numero); i++) {
+                            if (numero % i === 0) {
+                                ehPrimo = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (ehPrimo) {
+                        alert("O número é primo.");
+                    } else {
+                        alert("O número não é primo.");
+                    }
+                } else {
+                    alert("Valor inválido. Digite um número inteiro positivo.");
+                }
+            }
+        }
+
+        function calcularFatorial() {
+            let numero = prompt("Digite um número inteiro positivo:");
+
+            if (numero !== null) {
+                numero = parseInt(numero);
+
+                if (!isNaN(numero) && numero >= 0) {
+                    let fatorial = 1;
+                    for (let i = 2; i <= numero; i++) {
+                        fatorial *= i;
+                    }
+                    alert(`O fatorial de ${numero} é ${fatorial}.`);
+                } else {
+                    alert("Valor inválido. Digite um número inteiro positivo.");
+                }
+            }
+        }
+
+        function verificarTipoDado() {
+            let dado = prompt("Digite qualquer dado:");
+
+            if (dado !== null) {
+                let confirmar = confirm("Deseja verificar o tipo do dado informado?");
+
+                if (confirmar) {
+                    let tipo;
+
+                    if (!isNaN(Number(dado)) && dado.trim() !== "") {
+                        tipo = "Number";
+                    } else {
+                        tipo = "String";
+                    }
+
+                    document.body.innerHTML += `<p>O tipo do dado informado é: <strong>${tipo}</strong></p>`;
+                } else {
+                    document.body.innerHTML += "<p>Obrigado por visitar esta página.</p>";
+                }
+            }
+        }
+    </script>
+    <a href="index.html"><- Voltar</a>
 </body>
 </html>
