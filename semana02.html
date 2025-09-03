@@ -1,11 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #clock {
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+
+    .voltar {
+      display: block;
+      margin-top: 40px;
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+    }
+
+    .voltar:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <h1>Semana 2</h1>
+
+  <h1>Semana 2</h1>
+
+  <h2>Data Atual e Relógio</h2>
+  <p id="dataAtual"></p>
+  <p id="clock"></p>
+
+  <hr>
+
+  <h2>Verificador de Palíndromo</h2>
+  <input type="text" id="textoPalindromo" placeholder="Digite uma palavra ou frase">
+  <button onclick="verificarPalindromo()">Verificar</button>
+
+  <script>
+    // 1. Exibir data atual formatada
+    function exibirDataAtual() {
+      const diasSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+      const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+      const hoje = new Date();
+      const diaSemana = diasSemana[hoje.getDay()];
+      const dia = hoje.getDate();
+      const mes = meses[hoje.getMonth()];
+      const ano = hoje.getFullYear();
+
+      const dataFormatada = `${diaSemana}, ${dia} de ${mes} de ${ano}`;
+      document.getElementById('dataAtual').textContent = dataFormatada;
+    }
+
+    // 2. Relógio com setTimeout()
+    function atualizarRelogio() {
+      const agora = new Date();
+      const horas = String(agora.getHours()).padStart(2, '0');
+      const minutos = String(agora.getMinutes()).padStart(2, '0');
+      const segundos = String(agora.getSeconds()).padStart(2, '0');
+
+      const horario = `${horas}:${minutos}:${segundos}`;
+      document.getElementById('clock').textContent = horario;
+
+      setTimeout(atualizarRelogio, 1000);
+    }
+
+    // 3. Verificar se é palíndromo
+    function verificarPalindromo() {
+      const textoOriginal = document.getElementById('textoPalindromo').value;
+      const textoFormatado = textoOriginal
+        .toLowerCase()
+        .replace(/[\W_]/g, '');
+
+      const reverso = textoFormatado.split('').reverse().join('');
+
+      if (textoFormatado && textoFormatado === reverso) {
+        alert("É um palíndromo!");
+      } else {
+        alert("Não é um palíndromo.");
+      }
+    }
+
+    // Inicializações
+    exibirDataAtual();
+    atualizarRelogio();
+  </script>
+
+  <a class="voltar" href="index.html">← Voltar</a>
+
 </body>
 </html>
