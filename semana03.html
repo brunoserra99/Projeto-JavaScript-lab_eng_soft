@@ -1,21 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semana 3</title>
-
-
+    <title>Semana 03 - Atividade JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_semana03.css">
 </head>
 <body>
-    <h1>Semana 3</h1>
 
-    <h1>Estamos trabalhando no novo site!</h1>
-    <p>Em breve, uma nova experiência estará disponível para você.</p>
+    <nav>
+        <a href="semana01.html">Semana 01</a>
+        <a href="semana02.html">Semana 02</a>
+        <a href="semana03.html">Semana 03</a>
+        <a href="semana04.html">Semana 04</a>
+        <a href="semana05.html">Semana 05</a>
+        <a href="semana06.html">Semana 06</a>
+        <a href="semana07.html">Semana 07</a>
+        <a href="semana08.html">Semana 08</a>
+        <a href="semana09.html">Semana 09</a>
+    </nav>
 
+    <section class="container">
+        <h2>Semana 03 - Atividade</h2>
+        <p>Gerencie sua playlist usando JavaScript.</p>
 
-  
-    <a href="index.html"><- Voltar</a>
-    
+        <!-- Input para adicionar música -->
+        <input type="text" id="musicaInput" placeholder="Adicionar música">
+        <button onclick="adicionarMusica()">Adicionar</button>
+
+        <!-- Botões de ação -->
+        <button onclick="ordenarPlaylist()">Ordenar</button>
+        <button onclick="removerUltima()">Remover Última</button>
+
+        <!-- Lista da playlist -->
+        <ul id="playlist"></ul>
+
+        <!-- Div de resultado opcional -->
+        <div id="resultado"></div>
+    </section>
+
+    <a href="index.html" class="btn1">Voltar - Página inicial</a>
+
+    <footer>
+        <p>Laboratório de Engenharia - ADS</p>
+        <p>Aluno: brunoserra</p>
+        <p>&copy; 2025 Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        let playlist = []; 
+
+        // Atualiza a lista na tela
+        function atualizarLista() {
+            const ul = document.getElementById('playlist');
+            ul.innerHTML = ''; // limpa lista
+
+            // Percorre playlist -> for...of
+            for (const musica of playlist) {
+                const li = document.createElement('li');
+                li.textContent = musica;
+
+                const actions = document.createElement('div');
+                actions.classList.add('actions');
+
+                // Botão editar -> função "editar"
+                const btnEdit = document.createElement('button');
+                btnEdit.textContent = 'Editar';
+                btnEdit.classList.add('edit');
+                btnEdit.onclick = () => editarMusica(musica);
+
+                // Botão excluir -> função "excluir"
+                const btnDelete = document.createElement('button');
+                btnDelete.textContent = 'Excluir';
+                btnDelete.classList.add('delete');
+                btnDelete.onclick = () => excluirMusica(musica);
+
+                actions.appendChild(btnEdit);
+                actions.appendChild(btnDelete);
+                li.appendChild(actions);
+
+                ul.appendChild(li);
+            }
+        }
+
+        // Incluir música -> push
+        function adicionarMusica() {
+            const input = document.getElementById('musicaInput');
+            const nome = input.value.trim();
+            if (nome) {
+                playlist.push(nome);
+                input.value = '';
+                atualizarLista();
+            }
+        }
+
+        // Remover última música -> pop
+        function removerUltima() {
+            playlist.pop();
+            atualizarLista();
+        }
+
+        // Ordenar a playlist -> sort
+        function ordenarPlaylist() {
+            playlist.sort();
+            atualizarLista();
+        }
+
+        // Excluir música -> filter
+        function excluirMusica(nome) {
+            playlist = playlist.filter(m => m !== nome);
+            atualizarLista();
+        }
+
+        // Editar música -> localizar índice e atualizar
+        function editarMusica(nome) {
+            const novoNome = prompt("Editar música:", nome);
+            if (novoNome && novoNome.trim()) {
+                const index = playlist.indexOf(nome);
+                playlist[index] = novoNome.trim();
+                atualizarLista();
+            }
+        }
+    </script>
 </body>
 </html>

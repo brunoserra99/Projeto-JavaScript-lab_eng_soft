@@ -1,21 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semana 4</title>
-
-
+    <title>Semana 04 - Atividade JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_semana04.css">
 </head>
+
 <body>
-    <h1>Semana 4</h1>
 
-    <h1>Estamos trabalhando no novo site!</h1>
-    <p>Em breve, uma nova experiência estará disponível para você.</p>
+    <nav>
+        <!--
+        <a href="index.html">Voltar</a>
+-->
+        <a href="semana01.html">Semana 01</a>
+        <a href="semana02.html">Semana 02</a>
+        <a href="semana03.html">Semana 03</a>
+        <a href="semana04.html">Semana 04</a>
+        <a href="semana05.html">Semana 05</a>
+
+        <a href="semana06.html">Semana 06</a>
+        <a href="semana07.html">Semana 07</a>
+        <a href="semana08.html">Semana 08</a>
+        <a href="semana09.html">Semana 09</a>
+
+    </nav>
+
+    </nav>
 
 
-  
-    <a href="index.html"><- Voltar</a>
-    
+    <section class="em-construcao">
+        <h2>Semana 04 - Atividade</h2>
+        <p>Descrição da atividade...</p>
+    </section>
+
+    <div class="formulario">
+        <h1>Formulário de Cadastro</h1>
+        <form id="cadastroForm">
+
+            <!-- Nome -->
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                <span class="erro" id="erroNome"></span>
+            </div>
+
+            <!-- Email e Data -->
+            <div class="linha">
+                <div class="col">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="exemplo@dominio.com" required>
+                    <span class="erro" id="erroEmail"></span>
+                </div>
+                <div class="col">
+                    <label for="dataNasc">Data de Nascimento</label>
+                    <input type="date" id="dataNasc" required>
+                    <span class="erro" id="erroData"></span>
+                </div>
+            </div>
+
+            <!-- Telefones e perfil -->
+            <div class="linha">
+                <div class="col">
+                    <label for="telefoneFixo">Telefone Fixo</label>
+                    <input type="tel" id="telefoneFixo" placeholder="(xx)xxxx-xxxx" required>
+                    <span class="erro" id="erroFixo"></span>
+                </div>
+                <div class="col">
+                    <label for="telefoneCel">Celular</label>
+                    <input type="tel" id="telefoneCel" placeholder="(xx)xxxxx-xxxx" required>
+                    <span class="erro" id="erroCel"></span>
+                </div>
+                <div class="col">
+                    <label>Perfil</label><br>
+                    <input type="radio" name="perfil" value="professor" onclick="mostrarCampos('professor')"> Professor
+                    <input type="radio" name="perfil" value="aluno" onclick="mostrarCampos('aluno')"> Aluno
+                    <span class="erro" id="erroPerfil"></span>
+                </div>
+            </div>
+
+            <!-- Campos extras Professor -->
+            <div id="professorCampos" class="oculto">
+                <div class="linha">
+                    <div class="col">
+                        <label for="area">Área de Atuação</label>
+                        <input type="text" id="area" placeholder="Digite sua área">
+                        <span class="erro" id="erroArea"></span>
+                    </div>
+                    <div class="col">
+                        <label for="matriculaProf">Matrícula</label>
+                        <input type="text" id="matriculaProf" maxlength="5" placeholder="5 dígitos">
+                        <span class="erro" id="erroMatProf"></span>
+                    </div>
+                </div>
+                <div>
+                    <label for="lattes">Lattes</label>
+                    <input type="text" id="lattes" placeholder="Endereço Lattes">
+                    <span class="erro" id="erroLattes"></span>
+                </div>
+            </div>
+
+            <!-- Campos extras Aluno -->
+            <div id="alunoCampos" class="oculto">
+                <div class="linha">
+                    <div class="col">
+                        <label for="curso">Curso</label>
+                        <input type="text" id="curso" placeholder="Digite seu curso">
+                        <span class="erro" id="erroCurso"></span>
+                    </div>
+                    <div class="col">
+                        <label for="matriculaAluno">Matrícula</label>
+                        <input type="text" id="matriculaAluno" maxlength="10" placeholder="10 dígitos">
+                        <span class="erro" id="erroMatAluno"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="botoes">
+                <button type="submit">Enviar</button>
+                <button type="reset">Redefinir</button>
+            </div>
+        </form>
+    </div>
+
+
+    <a href="index.html" class="btn1">Voltar - Pagina inicial</a>
+
+    <footer>
+        <p>Laboratório de Engenharia - ADS</p>
+        <p>Aluno: brunoserra</p>
+        <p>&copy; 2025 Todos os direitos reservados</p>
+    </footer>
+
+
+    <script>
+        function mostrarCampos(tipo) {
+            document.getElementById("professorCampos").classList.add("oculto");
+            document.getElementById("alunoCampos").classList.add("oculto");
+
+            if (tipo === "professor") {
+                document.getElementById("professorCampos").classList.remove("oculto");
+            } else if (tipo === "aluno") {
+                document.getElementById("alunoCampos").classList.remove("oculto");
+            }
+        }
+
+        // Máscaras simples para telefone
+        function mascaraTel(tel) {
+            tel.value = tel.value.replace(/\D/g, '');
+            if (tel.value.length > 2 && tel.value.length <= 6)
+                tel.value = '(' + tel.value.slice(0, 2) + ')' + tel.value.slice(2);
+            else if (tel.value.length > 6)
+                tel.value = '(' + tel.value.slice(0, 2) + ')' + tel.value.slice(2, 6) + '-' + tel.value.slice(6, 10);
+        }
+
+        const form = document.getElementById("cadastroForm");
+        const camposTel = [document.getElementById("telefoneFixo"), document.getElementById("telefoneCel")];
+        camposTel.forEach(c => c.addEventListener('input', () => mascaraTel(c)));
+
+        // Validação onBlur
+        document.getElementById("nome").addEventListener("blur", function () {
+            const val = this.value.trim();
+            document.getElementById("erroNome").textContent = (val.split(' ').length < 2) ? "Digite seu nome completo" : "";
+        });
+
+        document.getElementById("email").addEventListener("blur", function () {
+            const val = this.value.trim();
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            document.getElementById("erroEmail").textContent = regex.test(val) ? "" : "Email inválido";
+        });
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Formulário enviado com sucesso!");
+        });
+    </script>
 </body>
+
 </html>

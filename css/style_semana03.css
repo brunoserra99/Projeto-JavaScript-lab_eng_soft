@@ -1,0 +1,78 @@
+/* Container da playlist */
+.container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 400px;
+    margin: 80px auto 20px; /* espaço do nav fixo */
+    text-align: center;
+}
+
+/* Input de música */
+input[type="text"] {
+    width: calc(100% - 120px);
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botões */
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 3px;
+    background-color: #0d47a1;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1565c0;
+}
+
+/* Lista de músicas */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+/* Item da lista */
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #e3f2fd;
+    border-radius: 5px;
+}
+
+/* Div com os botões editar/excluir */
+.actions button {
+    margin-left: 5px;
+    padding: 5px 10px;
+}
+
+/* Botão excluir */
+.actions button.delete {
+    background-color: #d32f2f;
+}
+
+.actions button.delete:hover {
+    background-color: #b71c1c;
+}
+
+/* Botão editar */
+.actions button.edit {
+    background-color: #fbc02d;
+    color: black;
+}
+
+.actions button.edit:hover {
+    background-color: #f9a825;
+}

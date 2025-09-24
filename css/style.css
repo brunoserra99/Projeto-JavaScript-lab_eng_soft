@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    color: #333;
+    padding-top: 50px;
+    /* ajuste conforme a altura do nav */
+}
+
+header {
+    background-color: #0d47a1;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background-color: #190074;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.em-construcao {
+    padding: 40px;
+    margin: 20px;
+    color: #666666;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.em-construcao h1 {
+    color: #050505;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.em-construcao h2 {
+    color: #888888;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.em-construcao p {
+    color: #777777;
+    font-size: 16px;
+}
+
+section {
+    padding: 20px;
+    margin: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+section img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    display: block;
+    margin: 10px auto;
+}
+
+h2 {
+    color: #0d47a1;
+}
+
+
+
+.img-pequena {
+    max-width: 250px !important;
+    height: auto !important;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #0d47a1;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background: #1565c0;
+}
+
+.btn1 {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #171718;
+    color: white;
+    border-radius: 105px;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.btn1:hover {
+    background: #1565c0;
+}
+
+
+
+footer {
+    background-color: #171718;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+footer p {
+    margin: 5px 0;
+}

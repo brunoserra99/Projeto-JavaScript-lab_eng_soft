@@ -1,21 +1,304 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semana 5</title>
-
-
+    <title>Semana 05 - Atividade JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h1>Semana 5</h1>
 
-    <h1>Estamos trabalhando no novo site!</h1>
-    <p>Em breve, uma nova experiência estará disponível para você.</p>
+    <nav>
+        <!--
+        <a href="index.html">Voltar</a>
+-->
+        <a href="semana01.html">Semana 01</a>
+        <a href="semana02.html">Semana 02</a>
+        <a href="semana03.html">Semana 03</a>
+        <a href="semana04.html">Semana 04</a>
+        <a href="semana05.html">Semana 05</a>
+
+        <a href="semana06.html">Semana 06</a>
+        <a href="semana07.html">Semana 07</a>
+        <a href="semana08.html">Semana 08</a>
+        <a href="semana09.html">Semana 09</a>
+
+    </nav>
 
 
-  
-    <a href="index.html"><- Voltar</a>
-    
+    <section>
+        <h2>Semana 05 - Atividade</h2>
+        <p>Descrição da atividade...</p>
+        <div id="resultado"></div>
+    </section>
+
+
+<!--  
+        ------------------------------------------------------------------
+-->
+<!--  
+        ------------------------------------------------------------------
+-->
+
+
+
+    <div id="app"></div>
+
+    <script>
+        // --- Dados iniciais ---
+        let homens = 0;
+        let mulheres = 0;
+
+        // --- Função helper para criar elementos com classe e texto ---
+        function el(tag, options = {}) {
+            const e = document.createElement(tag);
+            if (options.id) e.id = options.id;
+            if (options.className) e.className = options.className;
+            if (options.text !== undefined) e.textContent = options.text;
+            if (options.html !== undefined) e.innerHTML = options.html;
+            return e;
+        }
+
+        // --- Cria e injeta um <style>
+        (function criarEstilos() {
+            const css = `
+        /* container central */
+        #contador {
+          max-width: 720px;
+          margin: 80px auto; /* espaço para nav se houver */
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+          padding: 20px;
+          font-family: "Segoe UI", Roboto, Arial, sans-serif;
+          color: #222;
+        }
+        /* topo: total e botão atualizar */
+        .topo {
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          position: relative;
+          margin-bottom: 8px;
+        }
+        .btn-atualizar {
+          position: absolute;
+          right: 16px;
+          top: 0;
+          padding: 6px 10px;
+          background:#1976d2;
+          color: white;
+          border: none;
+          border-radius:6px;
+          cursor:pointer;
+          font-size:14px;
+        }
+        .titulo-total {
+          text-align:center;
+          font-weight:700;
+          font-size:18px;
+          letter-spacing:0.2px;
+          color:#0d47a1;
+        }
+        .valor-total {
+          text-align:center;
+          font-size:48px;
+          font-weight:800;
+          margin: 6px 0 14px;
+          color:#0b3d91;
+        }
+        /* area dos ícones/controles */
+        .panel-pessoas {
+          display:flex;
+          gap: 24px;
+          justify-content: center;
+          flex-wrap:wrap;
+        }
+        .card {
+          width:220px;
+          background:#f6f9ff;
+          border-radius:10px;
+          padding:12px;
+          text-align:center;
+          box-shadow: 0 2px 8px rgba(13,71,161,0.06);
+        }
+        .icone {
+          font-size:64px;
+          margin:6px 0;
+        }
+        .botoes-controle {
+          display:flex;
+          justify-content:center;
+          gap:10px;
+          margin:10px 0;
+        }
+        .controle-btn {
+          width:44px;
+          height:44px;
+          border-radius:8px;
+          border:none;
+          font-size:20px;
+          cursor:pointer;
+          background:#0d47a1;
+          color:white;
+        }
+        .controle-btn.remover { background:#d32f2f; }
+        .descricao {
+          display:flex;
+          justify-content:center;
+          gap:8px;
+          align-items:center;
+          margin-top:6px;
+          color:#333;
+        }
+        .rotulo { font-weight:600; color:#2b3a67; }
+        .contador-num {
+          background:white;
+          padding:6px 10px;
+          border-radius:6px;
+          min-width:48px;
+          text-align:center;
+          box-shadow: inset 0 -2px 0 rgba(0,0,0,0.03);
+          font-weight:700;
+        }
+
+        /* responsividade */
+        @media (max-width:600px) {
+          .card { width:100%; }
+          .valor-total { font-size:40px; }
+        }
+      `;
+            const style = document.createElement('style');
+            style.textContent = css;
+            document.head.appendChild(style);
+        })();
+
+        // --- Construir a estrutura inteira dentro da div #app ---
+        (function montarInterface() {
+            const app = document.getElementById('app');
+
+            // container principal
+            const container = el('div', { id: 'contador' });
+
+            // topo com título e botão atualizar à direita
+            const topo = el('div', { className: 'topo' });
+            const titulo = el('div', { className: 'titulo-total', text: 'Total de Pessoas' });
+            const btnAtualizar = el('button', { className: 'btn-atualizar', text: 'Atualizar' });
+            btnAtualizar.addEventListener('click', () => {
+                // ação de atualizar: recalcula e anima um pequeno flash
+                atualizarDisplay();
+                btnAtualizar.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }], { duration: 200 });
+            });
+
+            topo.appendChild(titulo);
+            topo.appendChild(btnAtualizar);
+
+            // valor total grande
+            const valorTotal = el('div', { className: 'valor-total', id: 'valorTotal', text: '0' });
+
+            // painel com dois cards: Homens e Mulheres
+            const painel = el('div', { className: 'panel-pessoas' });
+
+            // card homens
+            const cardHomens = criarCardPessoa({
+                tipo: 'Homens',
+                icone: '👨',
+                getQuantidade: () => homens,
+                onAdd: () => { homens++; atualizarDisplay(); },
+                onRemove: () => { if (homens > 0) homens--; atualizarDisplay(); }
+            });
+
+            // card mulheres
+            const cardMulheres = criarCardPessoa({
+                tipo: 'Mulheres',
+                icone: '👩',
+                getQuantidade: () => mulheres,
+                onAdd: () => { mulheres++; atualizarDisplay(); },
+                onRemove: () => { if (mulheres > 0) mulheres--; atualizarDisplay(); }
+            });
+
+            painel.appendChild(cardHomens);
+            painel.appendChild(cardMulheres);
+
+            container.appendChild(topo);
+            container.appendChild(valorTotal);
+            container.appendChild(painel);
+            app.appendChild(container);
+
+            // atualizar a interface inicial
+            atualizarDisplay();
+        })();
+
+        // --- Função que cria um card para homem/mulher (retorna elemento) ---
+        function criarCardPessoa({ tipo, icone, getQuantidade, onAdd, onRemove }) {
+            const card = el('div', { className: 'card' });
+
+            const ic = el('div', { className: 'icone', text: icone });
+            card.appendChild(ic);
+
+            const botoes = el('div', { className: 'botoes-controle' });
+            const btnAdd = el('button', { className: 'controle-btn', text: '+' });
+            const btnRem = el('button', { className: 'controle-btn remover', text: '−' });
+
+            btnAdd.addEventListener('click', () => { onAdd(); pulse(btnAdd); });
+            btnRem.addEventListener('click', () => { onRemove(); pulse(btnRem); });
+
+            botoes.appendChild(btnRem);
+            botoes.appendChild(btnAdd);
+            card.appendChild(botoes);
+
+            const descricao = el('div', { className: 'descricao' });
+            const rotulo = el('div', { className: 'rotulo', text: tipo });
+            const contadorNum = el('div', { className: 'contador-num', text: '0' }); // será atualizado
+            contadorNum.dataset.tipo = tipo; // referência para atualização
+            descricao.appendChild(rotulo);
+            descricao.appendChild(contadorNum);
+
+            card.appendChild(descricao);
+            return card;
+        }
+
+        // --- Atualiza todos os displays (total e cada contador) ---
+        function atualizarDisplay() {
+            const total = homens + mulheres;
+            document.getElementById('valorTotal').textContent = total;
+
+            // atualizar cada contador-num pelo data attribute
+            const counters = document.querySelectorAll('.contador-num');
+            counters.forEach(c => {
+                if (c.dataset.tipo === 'Homens') c.textContent = String(homens);
+                if (c.dataset.tipo === 'Mulheres') c.textContent = String(mulheres);
+            });
+        }
+
+        // --- Pequena animação de pulso para feedback ---
+        function pulse(elm) {
+            elm.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }], { duration: 150 });
+        }
+
+        // --- Fim do script ---
+    </script>
+
+
+
+<!--  
+        ------------------------------------------------------------------
+-->
+<!--  
+        ------------------------------------------------------------------
+-->
+
+
+
+    <a href="index.html" class="btn1">Voltar - Pagina inicial</a>
+
+    <footer>
+        <p>Laboratório de Engenharia - ADS</p>
+        <p>Aluno: brunoserra</p>
+        <p>&copy; 2025 Todos os direitos reservados</p>
+    </footer>
+
 </body>
+
 </html>
