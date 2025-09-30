@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Semana 06 - Atividade JavaScript</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style_semana03.css">
+    <link rel="stylesheet" href="css/style_semana06.css">
 </head>
 <body>
 
@@ -20,27 +20,107 @@
 
         <a href="semana06.html">Semana 06</a>
         <a href="semana07.html">Semana 07</a>
-        <a href="semana08.html">Semana 08</a>
-        <a href="semana09.html">Semana 09</a>
+        <!--<a href="semana08.html">Semana 08</a>
+        <a href="semana09.html">Semana 09</a>-->
 
     </nav>
 
     </nav>
 
-    <section class="em-construcao">
-        <h1>Estamos trabalhando no novo site!</h1>
-        <p>Em breve, uma nova experiência estará disponível para você.</p>
-    </section>
+   
 
-    <section class="em-construcao">
+    <section >
         <h2>Semana 06 - Atividade</h2>
-        <p>Descrição da atividade...</p>
-        <button id="executar">Executar JS</button>
+        <p>Desenvolvendo uma calculadora utilizando JavaScript</p>
         <div id="resultado"></div>
     </section>
 
     <!--apagar a section  Estamos trabalhando... e a class em-construcao -->
 
+
+
+    <!--  
+        ------------------------------------------------------------------
+-->
+<!--  
+        ------------------------------------------------------------------
+-->
+    <main>    
+        <div class="main">    
+            <div class="calculator">
+                <h1 class="titulo-calc">Calculadora</h1>
+                <div class="display" id="display"></div>
+                <div class="buttons">
+                    <button class="button light-gray" onclick="clearDisplay()">C</button>
+                    <button class="button light-gray" onclick="appendOperator('%')">%</button>
+                    <button class="button light-gray" onclick="appendOperator('.')">.</button>
+                    <button class="button orange" onclick="appendOperator('/')">/</button>
+                    <button class="button dark-gray" onclick="appendNumber('7')">7</button>
+                    <button class="button dark-gray" onclick="appendNumber('8')">8</button>
+                    <button class="button dark-gray" onclick="appendNumber('9')">9</button>
+                    <button class="button orange" onclick="appendOperator('*')">*</button>
+                    <button class="button dark-gray" onclick="appendNumber('4')">4</button>
+                    <button class="button dark-gray" onclick="appendNumber('5')">5</button>
+                    <button class="button dark-gray" onclick="appendNumber('6')">6</button>
+                    <button class="button orange" onclick="appendOperator('-')">-</button>
+                    <button class="button dark-gray" onclick="appendNumber('1')">1</button>
+                    <button class="button dark-gray" onclick="appendNumber('2')">2</button>
+                    <button class="button dark-gray" onclick="appendNumber('3')">3</button>
+                    <button class="button orange" onclick="appendOperator('+')">+</button>
+                    <button class="button dark-gray wide" onclick="appendNumber('0')">0</button>
+                    <button class="button orange" onclick="calculate()">=</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        let display = document.getElementById('display');
+    let currentInput = '';
+    let currentOperator = '';
+
+    function appendNumber(number) {
+        currentInput += number;
+        display.textContent = currentInput;
+    }
+
+    function appendOperator(operator) {
+        if (currentInput === '' && operator !== '.') return;
+        currentInput += operator;
+        display.textContent = currentInput;
+    }
+
+    function calculate() {
+        try {
+            let result = eval(currentInput);
+            if (!Number.isInteger(result)) {
+                result = result.toFixed(2);
+            }
+            currentInput = result;
+            display.textContent = currentInput;
+        } catch {
+            display.textContent = 'Erro';
+            currentInput = '';
+        }
+    }
+
+    function clearDisplay() {
+        currentInput = '';
+        display.textContent = currentInput;
+    }
+
+
+    </script>
+
+
+
+<!--  
+        ------------------------------------------------------------------
+-->
+<!--  
+        ------------------------------------------------------------------
+-->
 
 
     <a href="index.html" class="btn1">Voltar - Pagina inicial</a>
@@ -51,9 +131,6 @@
         <p>&copy; 2025 Todos os direitos reservados</p>
     </footer>
 
-    <script>
 
-        
-    </script>
 </body>
 </html>
